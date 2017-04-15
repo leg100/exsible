@@ -1,0 +1,27 @@
+---
+version: '3'
+services:
+  ubuntu1:
+    image: ubuntu-sshd
+    ports:
+      - "2222:22"
+    environment:
+      UID: 501
+    volumes:
+      - "./keys/ubuntu1:/home/ubuntu/.ssh"
+  ubuntu2:
+    image: ubuntu-sshd
+    ports:
+      - "2223:22"
+    environment:
+      UID: 501
+    volumes:
+      - "./keys/ubuntu2:/home/ubuntu/.ssh"
+  ubuntu3:
+    image: ubuntu-sshd
+    ports:
+      - "2224:22"
+    environment:
+      UID: 501
+    volumes:
+      - "./keys/ubuntu3:/home/ubuntu/.ssh"

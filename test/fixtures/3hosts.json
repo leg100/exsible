@@ -1,0 +1,51 @@
+{
+  "version": "0.0.1",
+  "tasks": {
+    "ssh_connection": {
+      "ubuntu_1": {
+        "args": {
+          "user": "ubuntu",
+          "port": 2222,
+          "identity_file": "./test/keys/ubuntu1/id_rsa",
+          "address": "localhost"
+        }
+      },
+      "ubuntu_2": {
+        "args": {
+          "user": "ubuntu",
+          "port": 2223,
+          "identity_file": "./test/keys/ubuntu2/id_rsa",
+          "address": "localhost"
+        }
+      },
+      "ubuntu_3": {
+        "args": {
+          "user": "ubuntu",
+          "port": 2224,
+          "identity_file": "./test/keys/ubuntu3/id_rsa",
+          "address": "localhost"
+        }
+      }
+    },
+    "command": {
+      "hostname_1": {
+        "args": {
+          "host": "ubuntu_1",
+          "command": "hostname"
+        }
+      },
+      "hostname_2": {
+        "args": {
+          "host": "ubuntu_2",
+          "command": "hostname"
+        }
+      },
+      "hostname_3": {
+        "args": {
+          "host": "ubuntu_3",
+          "command": "hostname"
+        }
+      }
+    }
+  }
+}

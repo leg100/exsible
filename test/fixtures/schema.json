@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Task",
+  "description": "An Exsible Task",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "object",
+      "properties": {
+        "ssh_connection": {
+          "patternProperties": {
+            "[a-z0-9_.-]+": {
+              "type": "object",
+              "properties": {
+                "args": {
+                  "$ref": "#/definitions/ssh_connection"
+                },
+                "depends_on": {
+                  "type": "array"
+                }
+              },
+              "required": ["args"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "command": {
+          "patternProperties": {
+            "[a-z0-9_.-]+": {
+              "type": "object",
+              "properties": {
+                "args": {
+                  "$ref": "#/definitions/command"
+                },
+                "depends_on": {
+                  "type": "array"
+                }
+              },
+              "required": ["args"],
+              "additionalProperties": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["version", "tasks"],
+  "definitions": {
+    "wrapper": {
+      "type": "object",
+      "properties": {
+        "depends_on": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ssh_connection": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "default": 22
+        } ,
+        "user": {
+          "type": "string",
+          "default": "root"
+        },
+        "identity_file": {
+          "type": "string",
+          "default": "$HOME/.ssh/id_rsa"
+        }
+      },
+      "dependencies": {
+        "user": ["identity_file"]
+      },
+      "required": ["address"],
+      "additionalProperties": false
+    },
+    "command": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        }
+      },
+      "required": ["command", "host"],
+      "additionalProperties": false
+    }
+  }
+}
